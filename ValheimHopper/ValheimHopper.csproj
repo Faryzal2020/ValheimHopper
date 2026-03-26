@@ -1,218 +1,62 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <Import Project="..\packages\JotunnLib.2.21.2\build\JotunnLib.props" Condition="Exists('..\packages\JotunnLib.2.21.2\build\JotunnLib.props')" />
-    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-    <PropertyGroup>
-        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{FE8B42E3-7082-4DFF-A5CC-6B62B0315ACA}</ProjectGuid>
-        <OutputType>Library</OutputType>
-        <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>ValheimHopper</RootNamespace>
-        <AssemblyName>ValheimHopper</AssemblyName>
-        <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-        <FileAlignment>512</FileAlignment>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
-        <DebugSymbols>true</DebugSymbols>
-        <DebugType>full</DebugType>
-        <Optimize>false</Optimize>
-        <OutputPath>bin\Debug\</OutputPath>
-        <DefineConstants>DEBUG;TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
-        <DebugType>pdbonly</DebugType>
-        <Optimize>true</Optimize>
-        <OutputPath>bin\Release\</OutputPath>
-        <DefineConstants>TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    </PropertyGroup>
-    <ItemGroup>
-        <Reference Include="BepInEx, Culture=neutral, PublicKeyToken=null">
-            <HintPath>$(VALHEIM_INSTALL)\BepInEx\core\BepInEx.dll</HintPath>
-            <HintPath>$(R2MODMAN_INSTALL)\BepInEx\core\BepInEx.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="0Harmony, Version=2.9.0.0, Culture=neutral, processorArchitecture=MSIL">
-            <HintPath>..\packages\HarmonyX.2.9.0\lib\net45\0Harmony.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="assembly_utils, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-            <HintPath>$(VALHEIM_INSTALL)\valheim_Data\Managed\publicized_assemblies\assembly_utils_publicized.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="assembly_valheim, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-            <HintPath>$(VALHEIM_INSTALL)\valheim_Data\Managed\publicized_assemblies\assembly_valheim_publicized.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="assembly_guiutils, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-            <HintPath>$(VALHEIM_INSTALL)\valheim_Data\Managed\publicized_assemblies\assembly_guiutils_publicized.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="Jotunn, Version=2.21.2.0, Culture=neutral, processorArchitecture=MSIL">
-          <HintPath>..\packages\JotunnLib.2.21.2\lib\net462\Jotunn.dll</HintPath>
-        </Reference>
-        <Reference Include="Microsoft.CSharp" />
-        <Reference Include="Mono.Cecil, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
-          <HintPath>..\packages\Mono.Cecil.0.11.4\lib\net40\Mono.Cecil.dll</HintPath>
-          <Private>false</Private>
-        </Reference>
-        <Reference Include="Mono.Cecil.Mdb, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
-          <HintPath>..\packages\Mono.Cecil.0.11.4\lib\net40\Mono.Cecil.Mdb.dll</HintPath>
-          <Private>false</Private>
-        </Reference>
-        <Reference Include="Mono.Cecil.Pdb, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
-          <HintPath>..\packages\Mono.Cecil.0.11.4\lib\net40\Mono.Cecil.Pdb.dll</HintPath>
-          <Private>false</Private>
-        </Reference>
-        <Reference Include="Mono.Cecil.Rocks, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
-          <HintPath>..\packages\Mono.Cecil.0.11.4\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
-          <Private>false</Private>
-        </Reference>
-        <Reference Include="MonoMod, Version=21.9.19.1, Culture=neutral, processorArchitecture=MSIL">
-          <HintPath>..\packages\MonoMod.21.9.19.1\lib\net40\MonoMod.exe</HintPath>
-          <Private>false</Private>
-        </Reference>
-        <Reference Include="MonoMod.RuntimeDetour, Version=22.1.29.1, Culture=neutral, processorArchitecture=MSIL">
-          <HintPath>..\packages\MonoMod.RuntimeDetour.22.1.29.1\lib\net452\MonoMod.RuntimeDetour.dll</HintPath>
-          <Private>false</Private>
-        </Reference>
-        <Reference Include="MonoMod.Utils, Version=22.1.29.1, Culture=neutral, processorArchitecture=MSIL">
-          <HintPath>..\packages\MonoMod.Utils.22.1.29.1\lib\net452\MonoMod.Utils.dll</HintPath>
-          <Private>false</Private>
-        </Reference>
-        <Reference Include="MultiUserChest, Culture=neutral, PublicKeyToken=null">
-            <HintPath Condition="Exists('$(VALHEIM_INSTALL)\BepInEx\plugins\MultiUserChest\MultiUserChest.dll')">$(VALHEIM_INSTALL)\BepInEx\plugins\MultiUserChest\MultiUserChest.dll</HintPath>
-            <HintPath Condition="Exists('$(R2MODMAN_INSTALL)\BepInEx\plugins\MultiUserChest\MultiUserChest.dll')">$(R2MODMAN_INSTALL)\BepInEx\plugins\MultiUserChest\MultiUserChest.dll</HintPath>
-            <HintPath Condition="Exists('$(R2MODMAN_INSTALL)\BepInEx\plugins\MSchmoecker-MultiUserChest\MultiUserChest.dll')">$(R2MODMAN_INSTALL)\BepInEx\plugins\MSchmoecker-MultiUserChest\MultiUserChest.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="System.Data.DataSetExtensions" />
-        <Reference Include="System.Xml.Linq" />
-        <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-            <HintPath>$(VALHEIM_INSTALL)\unstripped_corlib\UnityEngine.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-            <HintPath>$(VALHEIM_INSTALL)\unstripped_corlib\UnityEngine.CoreModule.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="UnityEngine.InputLegacyModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-            <HintPath>$(VALHEIM_INSTALL)\unstripped_corlib\UnityEngine.InputLegacyModule.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="UnityEngine.InputModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-            <HintPath>$(VALHEIM_INSTALL)\unstripped_corlib\UnityEngine.InputModule.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="UnityEngine.AssetBundleModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-            <HintPath>$(VALHEIM_INSTALL)\unstripped_corlib\UnityEngine.AssetBundleModule.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-            <HintPath>$(VALHEIM_INSTALL)\unstripped_corlib\UnityEngine.UI.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-            <HintPath>$(VALHEIM_INSTALL)\unstripped_corlib\UnityEngine.UIModule.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="UnityEngine.UIElementsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-            <HintPath>$(VALHEIM_INSTALL)\unstripped_corlib\UnityEngine.UIElementsModule.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-            <HintPath>$(VALHEIM_INSTALL)\unstripped_corlib\UnityEngine.TextRenderingModule.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="UnityEngine.ImageConversionModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-            <HintPath>$(VALHEIM_INSTALL)\unstripped_corlib\UnityEngine.ImageConversionModule.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-            <HintPath>$(VALHEIM_INSTALL)\unstripped_corlib\UnityEngine.PhysicsModule.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="UnityEngine.ParticleSystemModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-            <HintPath>$(VALHEIM_INSTALL)\unstripped_corlib\UnityEngine.ParticleSystemModule.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="System" />
-        <Reference Include="System.Core" />
-        <Reference Include="System.Data" />
-        <Reference Include="System.Xml" />
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="Debug\UnityDebugEnv.cs" />
-        <Compile Include="Logic\Helper\HopperHelper.cs" />
-        <Compile Include="Logic\Helper\InventoryHelper.cs" />
-        <Compile Include="Logic\Helper\ItemHelper.cs" />
-        <Compile Include="Logic\Helper\SnappointHelper.cs" />
-        <Compile Include="Logic\Hopper.cs" />
-        <Compile Include="Logic\HopperPriority.cs" />
-        <Compile Include="Logic\IPullTarget.cs" />
-        <Compile Include="Logic\IPushTarget.cs" />
-        <Compile Include="Logic\ITarget.cs" />
-        <Compile Include="Logic\ItemFilter.cs" />
-        <Compile Include="Logic\NetworkPiece.cs" />
-        <Compile Include="Logic\Pipe.cs" />
-        <Compile Include="Logic\VanillaExtensions\BeehiveTarget.cs" />
-        <Compile Include="Logic\VanillaExtensions\ContainerTarget.cs" />
-        <Compile Include="Logic\VanillaExtensions\ItemDropTarget.cs" />
-        <Compile Include="Logic\VanillaExtensions\SmelterFuelTarget.cs" />
-        <Compile Include="Logic\VanillaExtensions\SmelterOreTarget.cs" />
-        <Compile Include="Logic\VanillaExtensions\TurretTarget.cs" />
-        <Compile Include="Logic\ZProperty.cs" />
-        <Compile Include="Patches\ExtensionPatch.cs" />
-        <Compile Include="Patches\InventoryGuiPatch.cs" />
-        <Compile Include="Patches\PlacementPatch.cs" />
-        <Compile Include="Plugin.cs" />
-        <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="UI\HopperUI.cs" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include=".gitignore" />
-        <EmbeddedResource Include="Localization\Portuguese_Brazilian.json" />
-        <EmbeddedResource Include="Localization\Russian.json" />
-        <EmbeddedResource Include="Localization\German.json" />
-        <EmbeddedResource Include="ValheimHopper_AssetBundle" />
-        <EmbeddedResource Include="Localization\English.json" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="../README.md">
-            <Link>README.md</Link>
-        </Content>
-        <Content Include="../CHANGELOG.md">
-            <Link>CHANGELOG.md</Link>
-        </Content>
-    </ItemGroup>
-    <ItemGroup>
-      <None Include="App.config" />
-      <None Include="packages.config" />
-    </ItemGroup>
-    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-         Other similar extension points exist, see Microsoft.Common.targets.
-    <Target Name="BeforeBuild">
-    </Target>
-    <Target Name="AfterBuild">
-    </Target>
-    -->
-    <Import Project="../Environment.props" />
-    <Target Name="AfterBuild">
-      <Exec Command="$(SolutionDir)Libs/pdb2mdb.exe $(TargetPath)" />
-    </Target>
-    <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-      <PropertyGroup>
-        <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
-      </PropertyGroup>
-      <Error Condition="!Exists('..\packages\JotunnLib.2.21.2\build\JotunnLib.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JotunnLib.2.21.2\build\JotunnLib.props'))" />
-    </Target>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyName>ValheimHopper</AssemblyName>
+    <Description>Adds hoppers and pipes to transport items.</Description>
+    <Version>1.0.0</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
+    <RestoreAdditionalProjectSources>
+      https://api.nuget.org/v3/index.json;
+      https://nuget.bepinex.dev/v3/index.json;
+    </RestoreAdditionalProjectSources>
+    <RootNamespace>ValheimHopper</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
+    <PackageReference Include="BepInEx.Core" Version="5.*" />
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
+    <!-- Unity 2022.3.14 corresponds to Ashlands/Bog Witch Valheim updates -->
+    <PackageReference Include="UnityEngine.Modules" Version="2022.3.14" IncludeAssets="compile" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JotunnLib" Version="2.24.2" />
+    <PackageReference Include="HarmonyX" Version="2.13.0" />
+    <PackageReference Include="ValheimGameLibs" Version="0.221.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Explicit reference to MultiUserChest since it's a separate mod without official NuGet -->
+    <Reference Include="MultiUserChest">
+      <HintPath>..\Libs\MultiUserChest.dll</HintPath>
+      <!-- Ensure the dll isn't copied to output if not desired, though usually unneeded in BepInEx -->
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\Libs\UnityEngine.UI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>..\Libs\Unity.TextMeshPro.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Unity.InputSystem">
+      <HintPath>..\Libs\Unity.InputSystem.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Preserve embedded assets -->
+    <EmbeddedResource Include="Localization\Portuguese_Brazilian.json" />
+    <EmbeddedResource Include="Localization\Russian.json" />
+    <EmbeddedResource Include="Localization\German.json" />
+    <EmbeddedResource Include="Localization\English.json" />
+    <EmbeddedResource Include="ValheimHopper_AssetBundle" />
+  </ItemGroup>
+
 </Project>

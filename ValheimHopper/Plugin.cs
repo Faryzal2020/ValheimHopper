@@ -13,8 +13,8 @@ using ValheimHopper.UI;
 
 namespace ValheimHopper {
     [BepInPlugin(ModGuid, ModName, ModVersion)]
-    [BepInDependency(Jotunn.Main.ModGuid, "2.7.7")]
-    [BepInDependency(MultiUserChest.Plugin.ModGuid, "0.4.0")]
+    [BepInDependency(Jotunn.Main.ModGuid)]
+    [BepInDependency("com.maxsch.valheim.MultiUserChest")]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.Minor)]
     public class Plugin : BaseUnityPlugin {
         [PublicAPI] public const string ModName = "ItemHopper";
