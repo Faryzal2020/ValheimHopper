@@ -30,7 +30,6 @@ namespace ValheimHopper.Logic {
         protected override void Awake() {
             base.Awake();
 
-            zNetView = GetComponent<ZNetView>();
             container = GetComponent<Container>();
             containerTarget = GetComponent<ContainerTarget>();
 
@@ -67,6 +66,7 @@ namespace ValheimHopper.Logic {
         }
 
         public void AddItem(ItemDrop.ItemData item, Inventory source, ZDOID sender) {
+            Plugin.Debug($"[{DbgId}] AddItem '{item?.m_shared?.m_name ?? "null"}' pushed by upstream");
             containerTarget.AddItem(item, source, sender);
         }
 
@@ -79,7 +79,7 @@ namespace ValheimHopper.Logic {
         }
 
         public void RemoveItem(ItemDrop.ItemData item, Inventory destination, Vector2i destinationPos, ZDOID sender) {
-            Plugin.Debug($"[{DbgId}] RemoveItem '{item.m_shared.m_name}' pulled by hopper");
+            Plugin.Debug($"[{DbgId}] RemoveItem '{item?.m_shared?.m_name ?? "null"}' pulled by hopper");
             lastPullFrame = HopperHelper.GetFixedFrameCount();
             containerTarget.RemoveItem(item, destination, destinationPos, sender);
         }
@@ -101,7 +101,7 @@ namespace ValheimHopper.Logic {
             ItemDrop.ItemData item = container.GetInventory().FindLastItem(i => to.CanAddItem(i));
 
             if (item != null) {
-                Plugin.Debug($"[{DbgId}] Pushing '{item.m_shared.m_name}' -> target [{idx}] (counter={OutputCounter})");
+                Plugin.Debug($"[{DbgId}] Pushing '{item.m_shared?.m_name ?? "null"}' -> target [{idx}] (counter={OutputCounter})");
                 to.AddItem(item, container.GetInventory(), zNetView.m_zdo.m_uid);
             } else {
                 Plugin.Debug($"[{DbgId}] No pushable item for target [{idx}] (full or filtered)");

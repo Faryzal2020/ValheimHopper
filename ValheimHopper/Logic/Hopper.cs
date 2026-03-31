@@ -162,7 +162,7 @@ namespace ValheimHopper.Logic {
                 Plugin.Debug($"[{DbgId}] Pushing '{item.m_shared.m_name}' -> target [{idx}] (counter={OutputCounter})");
                 to.AddItem(item, container.GetInventory(), zNetView.m_zdo.m_uid);
             } else {
-                Plugin.Debug($"[{DbgId}] No pushable item for target [{idx}] (full, filtered, or leave-last)");
+                //Plugin.Debug($"[{DbgId}] No pushable item for target [{idx}] (full, filtered, or leave-last)");
             }
         }
 
