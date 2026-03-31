@@ -42,6 +42,8 @@ namespace ValheimHopper.Logic {
         public ZBool PickupItemsOption { get; private set; }
         public ZBool LeaveLastItemOption { get; private set; }
 
+        private string DbgId => $"Hopper@{transform.position.ToString("F1")}";
+
         protected override void Awake() {
             base.Awake();
 
@@ -112,10 +114,12 @@ namespace ValheimHopper.Logic {
                 return;
             }
 
-            IPullTarget from = pullFrom[pullCounter % pullFrom.Count];
+            int idx = pullCounter % pullFrom.Count;
+            IPullTarget from = pullFrom[idx];
             pullCounter++;
 
             if (!from.IsValid()) {
+                Plugin.Debug($"[{DbgId}] Pull source [{idx}] invalid, skipping");
                 return;
             }
 
@@ -125,9 +129,11 @@ namespace ValheimHopper.Logic {
 
             foreach (ItemDrop.ItemData item in from.GetItems()) {
                 if (!FindFreeSlot(item, out Vector2i pos)) {
+                    Plugin.Debug($"[{DbgId}] No free slot for '{item.m_shared.m_name}' from source [{idx}]");
                     continue;
                 }
 
+                Plugin.Debug($"[{DbgId}] Pulling '{item.m_shared.m_name}' from source [{idx}] (counter={pullCounter})");
                 from.RemoveItem(item, container.GetInventory(), pos, zNetView.m_zdo.m_uid);
                 return;
             }
@@ -141,17 +147,22 @@ namespace ValheimHopper.Logic {
                 return;
             }
 
-            IPushTarget to = pushTo[OutputCounter % pushTo.Count];
+            int idx = OutputCounter % pushTo.Count;
+            IPushTarget to = pushTo[idx];
             OutputCounter++;
 
             if (!to.IsValid()) {
+                Plugin.Debug($"[{DbgId}] Push target [{idx}] invalid, skipping");
                 return;
             }
 
             ItemDrop.ItemData item = container.GetInventory().FindLastItem(i => to.CanAddItem(i) && CanPushItem(i));
 
             if (item != null) {
+                Plugin.Debug($"[{DbgId}] Pushing '{item.m_shared.m_name}' -> target [{idx}] (counter={OutputCounter})");
                 to.AddItem(item, container.GetInventory(), zNetView.m_zdo.m_uid);
+            } else {
+                Plugin.Debug($"[{DbgId}] No pushable item for target [{idx}] (full, filtered, or leave-last)");
             }
         }
 
@@ -186,6 +197,7 @@ namespace ValheimHopper.Logic {
         }
 
         public void RemoveItem(ItemDrop.ItemData item, Inventory destination, Vector2i destinationPos, ZDOID sender) {
+            Plugin.Debug($"[{DbgId}] RemoveItem '{item.m_shared.m_name}' pulled by upstream");
             lastPullFrame = HopperHelper.GetFixedFrameCount();
             containerTarget.RemoveItem(item, destination, destinationPos, sender);
         }
