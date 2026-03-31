@@ -177,10 +177,12 @@ namespace ValheimHopper.Logic {
                 }
 
                 ItemDrop.ItemData item = container.GetInventory().FindLastItem(i => hopper.CanAddItem(i) && CanPushItem(i));
-                if (item == null) {
+                if (item != null) {
+                    hopper.AddItem(item, container.GetInventory(), zNetView.m_zdo.m_uid);
+                    OutputCounter++;
+                } else {
                     OutputCounter++; // Puller hopper full/filtered, skip.
                 }
-                // Else: we stall the push and wait for the hopper to pull!
             }
         }
 
@@ -212,7 +214,6 @@ namespace ValheimHopper.Logic {
 
         public void RemoveItem(ItemDrop.ItemData item, Inventory destination, Vector2i destinationPos, ZDOID sender) {
             containerTarget.RemoveItem(item, destination, destinationPos, sender);
-            OutputCounter++; // Increment branch cycle on passive pull
         }
 
         private bool FindFreeSlot(ItemDrop.ItemData itemToAdd, out Vector2i pos) {

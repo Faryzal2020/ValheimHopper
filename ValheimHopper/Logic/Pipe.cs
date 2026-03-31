@@ -74,7 +74,6 @@ namespace ValheimHopper.Logic {
 
         public void RemoveItem(ItemDrop.ItemData item, Inventory destination, Vector2i destinationPos, ZDOID sender) {
             containerTarget.RemoveItem(item, destination, destinationPos, sender);
-            OutputCounter++; // Increment branch turn on passive pull
         }
 
         private void PushItems() {
@@ -116,10 +115,12 @@ namespace ValheimHopper.Logic {
                 }
 
                 ItemDrop.ItemData item = container.GetInventory().FindLastItem(i => hopper.CanAddItem(i));
-                if (item == null) {
+                if (item != null) {
+                    hopper.AddItem(item, container.GetInventory(), zNetView.m_zdo.m_uid);
+                    OutputCounter++;
+                } else {
                     OutputCounter++; // Hopper full/filter rejects
                 }
-                // Else: we stall push and let Hopper pull to complete the turn.
             }
         }
 

@@ -23,8 +23,6 @@ namespace ValheimHopper {
 
         private static ConfigEntry<bool> addSmelterSnappoints;
         private static ConfigEntry<bool> debugLogs;
-        public static ConfigEntry<bool> SyncOutputCounter;
-
 
         public static Plugin Instance { get; private set; }
         public static AssetBundle AssetBundle { get; private set; }
@@ -39,7 +37,6 @@ namespace ValheimHopper {
 
             addSmelterSnappoints = Config.Bind("General", "Add Smelter Snappoints", true, "Adds snappoints to inputs/outputs of the smelter, charcoal kiln, blastfurnace, windmill and spinning wheel. Requires a restart to take effect.");
             debugLogs = Config.Bind("General", "Debug Logs", false, "Enable debug logging.");
-            SyncOutputCounter = Config.Bind("General", "Sync Output Counter", false, "Synchronizes the round-robin output cycle of pipes and hoppers between clients using ZDO.");
 
 
             CustomLocalization localization = LocalizationManager.Instance.GetLocalization();
